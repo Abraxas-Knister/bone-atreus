@@ -23,6 +23,7 @@ tap_dance_action_t tap_dance_actions[] = {
 
 // flow from daliusd
 const uint16_t flow_config[FLOW_COUNT][2] = {
+    {MO(0), KC_LSFT},
     {MO(2), KC_LALT},
     {MO(2), KC_LGUI},
     {MO(2), KC_LCTL},
@@ -51,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F, KC_V, DE_UDIA, DE_ADIA, DE_ODIA, KC_ESC, /* mid */
         KC_ENT, DE_Y, DE_Z, KC_COMMA, KC_DOT, KC_K,
         // Row 4
-        KC_LEFT, KC_UP, DE_SS, KC_LGUI, OSM(MOD_LSFT), K_SYM, /* mid */
+        KC_LEFT, KC_UP, DE_SS, KC_LGUI, KC_LSFT, K_SYM, /* mid */
 	K_NAV, KC_SPC, KC_TAB, KC_Q, KC_DOWN, KC_RIGHT),
     [1] = LAYOUT(
         // Row 1
