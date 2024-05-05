@@ -1,0 +1,3 @@
+TAP_DANCE_ENABLE=yes
+SEND_STRING_ENABLE=yes
+SRC += flow.c
