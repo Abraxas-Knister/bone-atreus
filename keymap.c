@@ -53,7 +53,7 @@ combo_t key_combos[] = {
     COMBO(C_ueae, KC_ESC),   COMBO(C_12, KC_BSPC),   COMBO(C_23, KC_ENT),
     COMBO(C_45, DE_PLUS),    COMBO(C_56, DE_MINS),   COMBO(C_78, DE_ASTR),
     COMBO(C_89, DE_SLSH),    COMBO(C_60, DE_LPRN),   COMBO(C_3D, DE_RPRN),
-    COMBO(C_123, DE_COLN),   COMBO(C_456, DE_DLR),   COMBO(C_456, DE_PERC)};
+    COMBO(C_123, DE_COLN),   COMBO(C_456, DE_DLR),   COMBO(C_789, DE_PERC)};
 
 // redefine keycodes for visibility
 #define _AE_ DE_ADIA
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├────────┼──────────┼─────────┼─────────┼─────────┤                     ├────────┼────────┼────────┼────────┼────────┤
     KC_BSPC, KC_LEFT,  KC_DOWN,   KC_RGHT,  KC_DEL,                         DE_LBRC, KC_4,    KC_5,   KC_6,    KC_0,
 //├────────┼──────────┼─────────┼─────────┼─────────┼──────┐       ┌──────┼────────┼────────┼────────┼────────┼────────┤
-    _ALT_,   _GUI_,    _SFT_,     _CTL_,    KC_NO,  KC_NO,         KC_PSCR, DE_LBRC, KC_1,    KC_2,   KC_3,    KC_DOT,
+    _ALT_,   _GUI_,    _SFT_,     _CTL_,    KC_NO,  KC_NO,         KC_PSCR, DE_RBRC, KC_1,    KC_2,   KC_3,    KC_DOT,
 //├────────┼──────────┼─────────┼─────────┼─────────┼──────┤       ├──────┼────────┼────────┼────────┼────────┼────────┤
     KC_NO,   KC_NO,     KC_NO,    KC_NO,    KC_NO,  OSL(lMED),    TG(lN_N), KC_NO,   KC_NO,   KC_NO,  KC_NO,   KC_NO),
 //└────────┴──────────┴─────────┴─────────┴─────────┴──────┘       └──────┴────────┴────────┴────────┴────────┴────────┘
