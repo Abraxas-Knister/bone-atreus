@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
 
-enum layers { lBONE, lSYMB, lN_N, lMED};
+enum layers { lBONE, lSYMB, lN_N, lMED, lSTENO };
 enum custom_keycodes { K_NAV = SAFE_RANGE, K_SYM };
 
 // flow from daliusd
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼───────┤
    KC_C,    KC_T,    KC_I,    KC_E,    KC_O,                              KC_B,    KC_N,    KC_R,    KC_S,    KC_G,
 //├────────┼────────┼────────┼────────┼────────┼───────┐        ┌────────┼────────┼────────┼────────┼────────┼───────┤
-   KC_F,    KC_V,    _UE_,    _AE_,    _OE_,   KC_NO,            KC_NO,   DE_Y,    DE_Z,    KC_COMM, KC_DOT,  KC_K,
+   KC_F,    KC_V,    _UE_,    _AE_,    _OE_,   DF(lSTENO),       KC_NO,   DE_Y,    DE_Z,    KC_COMM, KC_DOT,  KC_K,
 //├────────┼────────┼────────┼────────┼────────┼───────┤        ├────────┼────────┼────────┼────────┼────────┼───────┤
    KC_LGUI, KC_LCTL, DE_SS,   QK_REP,  _SFT_,   K_SYM,           K_NAV,   KC_SPC,  QK_AREP, KC_Q,    KC_LCTL,  KC_NO),
 //└────────┴────────┴────────┴────────┴────────┴───────┘        └────────┴────────┴────────┴────────┴────────┴───────┘
@@ -94,9 +94,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├────────┼────────┼────────┼────────┼────────┼───────┐        ┌────────┼────────┼────────┼────────┼────────┼───────┤
    KC_VOLD, KC_NO,   KC_NO,   KC_NO,   KC_BRID, KC_NO,           KC_NO,   KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F11,
 //├────────┼────────┼────────┼────────┼────────┼───────┤        ├────────┼────────┼────────┼────────┼────────┼───────┤
-   KC_MUTE, KC_NO,   KC_NO,   KC_NO,   KC_NO,   TG(lMED),       TG(lMED), KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO)
+   KC_MUTE, KC_NO,   KC_NO,   KC_NO,   KC_NO,   TG(lMED),       TG(lMED), KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO),
 //└────────┴────────┴────────┴────────┴────────┴───────┘        └────────┴────────┴────────┴────────┴────────┴───────┘
-};
+ [lSTENO] = LAYOUT(
+//┌────────┬────────┬────────┬────────┬────────┐                         ┌────────┬────────┬────────┬────────┬───────┐
+   KC_NO,   KC_NO,   STN_N1,  STN_N2,  KC_NO,                             STN_N3,  STN_N4,  KC_NO,   KC_NO,   KC_NO,
+//├────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼───────┤
+   STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST2,                           STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR,
+//├────────┼────────┼────────┼────────┼────────┼───────┐        ┌────────┼────────┼────────┼────────┼────────┼───────┤
+   STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST3,DF(lBONE),        KC_NO,   STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR,
+//├────────┼────────┼────────┼────────┼────────┼───────┤        ├────────┼────────┼────────┼────────┼────────┼───────┤
+   KC_NO,    KC_NO,  KC_NO,   STN_A,   STN_O,   KC_NO,           STN_E,   STN_U,   KC_NO,   KC_NO,   KC_NO,   KC_NO),
+//└────────┴────────┴────────┴────────┴────────┴───────┘        └────────┴────────┴────────┴────────┴────────┴───────┘
+} ;
 // clang-format on
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {};
