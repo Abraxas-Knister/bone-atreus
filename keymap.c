@@ -24,7 +24,7 @@ const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
 
 // combos
 const uint16_t PROGMEM C_comdot[] = {KC_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM C_zcomdot[] = {DE_Z, KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM C_zcom[] = {DE_Z, KC_COMM, COMBO_END};
 const uint16_t PROGMEM C_vue[] = {KC_V, DE_UDIA, COMBO_END};
 const uint16_t PROGMEM C_ueae[] = {DE_UDIA, DE_ADIA, COMBO_END};
 const uint16_t PROGMEM C_12[] = {KC_1, KC_2, COMBO_END};
@@ -39,11 +39,11 @@ const uint16_t PROGMEM C_123[] = {KC_1, KC_2, KC_3, COMBO_END};
 const uint16_t PROGMEM C_456[] = {KC_4, KC_5, KC_6, COMBO_END};
 const uint16_t PROGMEM C_789[] = {KC_7, KC_8, KC_9, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(C_zcomdot, KC_BSPC), COMBO(C_comdot, KC_ENT), COMBO(C_vue, KC_TAB),
-    COMBO(C_ueae, KC_ESC),     COMBO(C_12, KC_BSPC),    COMBO(C_23, KC_ENT),
-    COMBO(C_45, DE_PLUS),      COMBO(C_56, DE_MINS),    COMBO(C_78, DE_ASTR),
-    COMBO(C_89, DE_SLSH),      COMBO(C_LB4, DE_LPRN),   COMBO(C_RB1, DE_RPRN),
-    COMBO(C_123, DE_COLN),     COMBO(C_456, DE_DLR),    COMBO(C_789, DE_PERC)};
+    COMBO(C_zcom, KC_BSPC), COMBO(C_comdot, KC_ENT), COMBO(C_vue, KC_TAB),
+    COMBO(C_ueae, KC_ESC),  COMBO(C_12, KC_BSPC),    COMBO(C_23, KC_ENT),
+    COMBO(C_45, DE_PLUS),   COMBO(C_56, DE_MINS),    COMBO(C_78, DE_ASTR),
+    COMBO(C_89, DE_SLSH),   COMBO(C_LB4, DE_LPRN),   COMBO(C_RB1, DE_RPRN),
+    COMBO(C_123, DE_COLN),  COMBO(C_456, DE_DLR),    COMBO(C_789, DE_PERC)};
 
 // redefine keycodes for visibility
 #define _AE_ DE_ADIA
@@ -110,4 +110,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {};
+#endif
+
+// I'm not using MAGIC to swap any mods
+#ifndef MAGIC_ENABLE
+uint16_t keycode_config(uint16_t keycode) { return keycode; }
+uint8_t mod_config(uint8_t mod) { return mod; }
 #endif

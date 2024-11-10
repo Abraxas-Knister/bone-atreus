@@ -13,6 +13,6 @@ in a linux/xorg environment.
 
 The **Atreus** is a 40% (it has about 44 keys, which are about 40% of the ~100 keys sported by a
 regular sized keyboard) fully programmable keyboard, sold by keyboardio. It is powered by an ATmega32U4
-which means I can program it using qmk. The firmware size sits at 95% of the memory size.
+which means I can program it using qmk, and that some firmware size management considerations have to be made.
 
 This README doesn't document details of the layout, see commit messages instead, better yet, read the source.
