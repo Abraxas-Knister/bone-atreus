@@ -1,7 +1,7 @@
+#include "keycodes.h"
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
-
-enum layers { lBONE, lSYMB, lN_N, lMED, lSTENO };
+enum layers { lBONE, lSYMB, lN_N, lMED, lSTENO, lHOLL };
 enum custom_keycodes { K_NAV = SAFE_RANGE, K_SYM };
 
 // flow from daliusd
@@ -26,6 +26,7 @@ const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
 const uint16_t PROGMEM C_comdot[] = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM C_zcom[] = {DE_Z, KC_COMM, COMBO_END};
 const uint16_t PROGMEM C_vue[] = {KC_V, DE_UDIA, COMBO_END};
+//
 const uint16_t PROGMEM C_ueae[] = {DE_UDIA, DE_ADIA, COMBO_END};
 const uint16_t PROGMEM C_12[] = {KC_1, KC_2, COMBO_END};
 const uint16_t PROGMEM C_23[] = {KC_2, KC_3, COMBO_END};
@@ -90,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
    KC_PWR,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                              XXXXXXX,  KC_F7,    KC_F8,    KC_F9,    KC_F12, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┤                           ├─────────┼─────────┼─────────┼─────────┼────────┤
-   KC_VOLU,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BRIU,                              XXXXXXX,  KC_F4,    KC_F5,    KC_F6,    KC_F10, 
+   KC_VOLU,  XXXXXXX, DF(lHOLL), XXXXXXX,  KC_BRIU,                              XXXXXXX,  KC_F4,    KC_F5,    KC_F6,    KC_F10, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
    KC_VOLD,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BRID, XXXXXXX,           XXXXXXX,  XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F11, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
@@ -105,6 +106,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    STN_S2,   STN_KL,   STN_WL,   STN_RL,   STN_ST3, DF(lBONE),         XXXXXXX,  STN_RR,   STN_BR,   STN_GR,   STN_SR,   STN_ZR, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
    XXXXXXX,  XXXXXXX,  XXXXXXX,  STN_A,    STN_O,    XXXXXXX,          STN_E,    STN_U,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
+//└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
+ [lHOLL] = LAYOUT(
+//┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
+   KC_TAB,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                              XXXXXXX,  XXXXXXX,  KC_UP,    XXXXXXX,  KC_I, 
+//├─────────┼─────────┼─────────┼─────────┼─────────┤                           ├─────────┼─────────┼─────────┼─────────┼────────┤
+   XXXXXXX,  KC_D,     KC_X,     KC_S,     XXXXXXX,                              XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT, XXXXXXX, 
+//├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
+   XXXXXXX,  XXXXXXX,  KC_A,     XXXXXXX,  XXXXXXX, DF(lBONE),         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+//├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
+   KC_ESC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_Z,     XXXXXXX,          XXXXXXX,  KC_C,     XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_ENT),
 //└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
 };
 // clang-format on
