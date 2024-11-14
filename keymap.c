@@ -1,8 +1,18 @@
 #include "keycodes.h"
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
+
 enum layers { lBONE, lSYMB, lN_N, lMED, lSTENO, lHOLL };
 enum custom_keycodes { K_NAV = SAFE_RANGE, K_SYM };
+
+// redefine keycodes for visibility
+#define _AE_ DE_ADIA
+#define _OE_ DE_ODIA
+#define _UE_ DE_UDIA
+#define _SFT_ OSM(MOD_LSFT)
+#define _ALT_ OSM(MOD_LALT)
+#define _GUI_ OSM(MOD_LGUI)
+#define _CTL_ OSM(MOD_LCTL)
 
 // flow from daliusd
 // https://github.com/qmk/qmk_firmware/pull/16174
@@ -26,7 +36,6 @@ const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
 const uint16_t PROGMEM C_comdot[] = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM C_zcom[] = {DE_Z, KC_COMM, COMBO_END};
 const uint16_t PROGMEM C_vue[] = {KC_V, DE_UDIA, COMBO_END};
-//
 const uint16_t PROGMEM C_ueae[] = {DE_UDIA, DE_ADIA, COMBO_END};
 const uint16_t PROGMEM C_12[] = {KC_1, KC_2, COMBO_END};
 const uint16_t PROGMEM C_23[] = {KC_2, KC_3, COMBO_END};
@@ -45,15 +54,6 @@ combo_t key_combos[] = {
     COMBO(C_45, DE_PLUS),   COMBO(C_56, DE_MINS),    COMBO(C_78, DE_ASTR),
     COMBO(C_89, DE_SLSH),   COMBO(C_LB4, DE_LPRN),   COMBO(C_RB1, DE_RPRN),
     COMBO(C_123, DE_COLN),  COMBO(C_456, DE_DLR),    COMBO(C_789, DE_PERC)};
-
-// redefine keycodes for visibility
-#define _AE_ DE_ADIA
-#define _OE_ DE_ODIA
-#define _UE_ DE_UDIA
-#define _SFT_ OSM(MOD_LSFT)
-#define _ALT_ OSM(MOD_LALT)
-#define _GUI_ OSM(MOD_LGUI)
-#define _CTL_ OSM(MOD_LCTL)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
