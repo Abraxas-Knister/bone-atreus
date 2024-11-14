@@ -1,3 +1,4 @@
+VPATH += keyboards/gboards/
 COMBO_ENABLE=yes
 SRC += flow.c
 REPEAT_KEY_ENABLE=yes
