@@ -15,4 +15,25 @@ The **Atreus** is a 40% (it has about 44 keys, which are about 40% of the ~100 k
 regular sized keyboard) fully programmable keyboard, sold by keyboardio. It is powered by an ATmega32U4
 which means I can program it using qmk, and that some firmware size management considerations have to be made.
 
-This README doesn't document details of the layout, see commit messages instead, better yet, read the source.
+The key placement suggests (for me) a finger to key assignment like so:
+
+                                 index
+    ┌───────────────┬───────┬───────────────┐
+    │   R       R   │   M   │   I       I   │
+    ├───────┐       │       │               │
+    │   P   │   R   │   M   │   •       I   │
+    │       │       │       │               └───────┐
+    │   P   │   R   │   M   │   I       I       I   │
+    │       │       │       ├───────────────────────┤
+    │  P H  │   R   │   M   │   T       •       T   │
+    └───────┴───────┴───────┴───────────────────────┘
+     pinky    ring    middle          thumb
+
+          H: a key you could press with the palm
+
+This is for the left hand, the right hand is symmetrical.
+
+The layout makes use of one-shot modifiers and layer switches, which is made possible by
+[this](https://github.com/qmk/qmk_firmware/pull/16174) code.
+
+Low profile keycaps and low weight springs/switches open up the possibility for same finger combos.
