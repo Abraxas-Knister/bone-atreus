@@ -17,17 +17,19 @@ which means I can program it using qmk, and that some firmware size management c
 
 The key placement suggests a finger to key assignment like so:
 
-          ring        middle      index
-    ┌───────────────┬───────┬───────────────┐
-    │   R       R   │   M   │   I       I   │
-    ├───────┐       │       │               │
-    │   •   │   •   │   •   │   •       I   │
-    │       │       │       │               └───────┐
-    │   P   │   R   │   M   │   I       I       I † │
-    │       │       │       ├───────────────────────┤
-    │   P †H│   R † │   M   │   T       •       T   │
-    └───────┴───────┴───────┴───────────────────────┘
-     pinky                            thumb
+                 middle
+          ring  ┌─────┐
+          ┌─────┤  M  ├─────┐ index
+    ┌─────┘  R  │     │  I  └─────┐
+    │  R        │  •  │        I  │
+    ├─────┐  •  │     │  •        │
+    │  •  │     │  M  │        I  └─────┐
+    │     │  R  │     │  I           I† │
+    │  P  │     │  M  ├─────┐  I  ┌─────┤
+    │     │  R† ├─────┤  T  └─────┘  T  │
+    │H  P†├─────┘     └─────┐  •  ┌─────┘
+    └─────┘                 └─────┘ thumb
+     pinky
 
           • : home positions
           † : assign seldom tasks
