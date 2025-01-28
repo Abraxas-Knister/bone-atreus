@@ -2,37 +2,68 @@
 /*
   ┌───────┬───────┬───────┬───────┬───────┐                        ┌───────┬───────┬───────┬───────┬───────┐
   │       │       │       │       │       │                        │       │       │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
-  │       │       │       │   •   │       │                        │       │   •︎   │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
-  │       │      tab   escape     │       │       │        │       │       │  backspace  enter     │       │
-  ├───────┼───────┼───────┼───────┼───────┼───────┤        ├───────┼───────┼───────┼───────┼───────┼───────┤
-  │       │       │       │       │   •  alt      │        │     strg  •   │       │       │       │       │
+  ├───────┼─pgup──┼──up───┼─pgdw──┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
+  │     home      │       │   •  end      │                        │       │   •︎   │       │       │       │
+  ├─lmed──┼─left──┼─down──┼─right─┼───────┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
+  │       │      tab   escape     │       │       │        │       │      del backspace  enter     │       │
+  ├───────┼───── windows_one ─────┼───────┼───────┤        ├───────┼───────┼───── windows_two ─────┼───────┤
+  │       │       │       │       │   •  alt      │        │     ctrl  •   │       │       │     steno     │
   └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
 */
-COMB(backspace,  KC_BSPC,  DE_Z,     KC_COMM)
-COMB(enter,      KC_ENT,   KC_COMM,  KC_DOT)
-COMB(escape,     KC_ESC,   DE_UDIA,  DE_ADIA)
-COMB(tab,        KC_TAB,   KC_V,     DE_UDIA)
-COMB(alt,        _ALT_,    _SFT_,    K_SYM)
-COMB(strg,       _CTL_,    K_NAV,    KC_SPC)
+COMB(lmed,        OSL(lMED), KC_F,    KC_C)
+COMB(pgup,        KC_PGUP,   KC_D,    KC_T)
+COMB(pgdw,        KC_PGDN,   KC_A,    KC_E)
+COMB(home,        KC_HOME,   KC_C,    KC_T)
+COMB(end,         KC_END,    KC_E,    KC_O)
+COMB(up,          KC_UP,     KC_U,    KC_I)
+COMB(left,        KC_LEFT,   KC_T,    KC_V)
+COMB(down,        KC_DOWN,   KC_I,    DE_UDIA)
+COMB(right,       KC_RGHT,   KC_E,    DE_ADIA)
+COMB(backspace,   KC_BSPC,   DE_Z,    KC_COMM)
+COMB(del,         KC_DEL,    DE_Y,    DE_Z)
+COMB(enter,       KC_ENT,    KC_COMM, KC_DOT)
+COMB(escape,      KC_ESC,    DE_UDIA, DE_ADIA)
+COMB(tab,         KC_TAB,    KC_V,    DE_UDIA)
+COMB(alt,         _ALT_,     _SFT_,   QK_REP)
+COMB(ctrl,        _CTL_,     QK_REP,  KC_SPC)
+COMB(windows_one, _GUI_,     KC_V,    DE_UDIA, DE_ADIA)
+COMB(windows_two, _GUI_,     DE_Z,    KC_COMM, KC_DOT)
+TOGG(steno,       lSTENO,    K_STN_1, K_STN_2)
 
-// numpad layer
+// symbol layer
 /*
   ┌───────┬───────┬───────┬───────┬───────┐                        ┌───────┬───────┬───────┬───────┬───────┐
   │       │       │       │       │       │                        │       │       │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┤                        ├───────┼─times─┼divided┼───────┼───────┤
-  │       │       │       │   •   │       │                        │    lparen •   │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┼───────┐        ┌───────┼───────┼─plus──┼─minus─┼───────┼───────┤
-  │       │       │       │       │       │       │        │       │    rparen     │       │       │       │
+  ├───────┼───────┼───────┼───────┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
+  │       │       │       │   •   │       │                        │       │   •   │       │       │       │
+  ├──one──┼──two──┼─three─┼─four──┼─five──┼───────┐        ┌───────┼─six───┼─seven─┼─eight─┼─nine──┼─zero──┤
+  │       │       │       │       │       │       │        │       │       │       │       │       │       │
   ├───────┼───────┼───────┼───────┼───────┼───────┤        ├───────┼───────┼───────┼───────┼───────┼───────┤
-  │       │       │       │       │   •   │       │        │ hold  │   •   │       │       │       │       │
+  │       │       │       │       │   •   │       │        │      gui  •   │       │       │       │       │
   └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
 */
-COMB(plus,     DE_PLUS,  KC_1,     KC_4)
-COMB(minus,    DE_MINS,  KC_2,     KC_5)
-COMB(times,    DE_ASTR,  KC_4,     KC_7)
-COMB(divided,  DE_SLSH,  KC_5,     KC_8)
-COMB(lparen,   DE_LPRN,  DE_LBRC,  KC_4)
-COMB(rparen,   DE_RPRN,  DE_RBRC,  KC_1)
+COMB(gui,  _GUI_, _ALT_,   _CTL_)
+COMB(zero,  KC_0, DE_COLN, DE_SCLN)
+COMB(one,   KC_1, DE_BSLS, DE_HASH)
+COMB(two,   KC_2, DE_SLSH, DE_DLR)
+COMB(three, KC_3, DE_LCBR, DE_PIPE)
+COMB(four,  KC_4, DE_RCBR, DE_TILD)
+COMB(five,  KC_5, DE_ASTR, DE_GRV)
+COMB(six,   KC_6, DE_QUES, DE_PLUS)
+COMB(seven, KC_7, DE_LPRN, DE_PERC)
+COMB(eight, KC_8, DE_RPRN, DE_DQUO)
+COMB(nine,  KC_9, DE_MINS, DE_QUOT)
 
+// steno layer
+/*
+  ┌───────┬───────┬───────┬───────┬───────┐                        ┌───────┬───────┬───────┬───────┬───────┐
+  │       │       │       │       │       │                        │       │       │       │       │       │
+  ├───────┼───────┼───────┼───────┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
+  │       │       │       │   •   │       │                        │       │   •   │       │       │       │
+  ├───────┼───────┼───────┼───────┼───────┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
+  │       │       │       │       │       │       │        │       │       │       │       │       │       │
+  ├───────┼───────┼───────┼───────┼───────┼───────┤        ├───────┼───────┼───────┼───────┼───────┼───────┤
+  │       │       │       │       │   •   │       │        │       │   •   │       │       │     steno     │
+  └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
+*/
+// steno already defined

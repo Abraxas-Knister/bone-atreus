@@ -1,8 +1,13 @@
 #include "keymap_german.h"
+#include "quantum_keycodes.h"
 #include QMK_KEYBOARD_H
 
 enum layers { lBONE, lSYMB, lN_N, lMED, lSTENO, lHOLL };
-enum custom_keycodes { K_NAV = SAFE_RANGE, K_SYM };
+enum custom_keycodes {
+  K_STN_1 = SAFE_RANGE, // combo: back to base from steno
+  K_STN_2,              //
+  KC_SS                 // DE_SS but it becomes RSA(KC_S) when shifted
+};
 #define _AE_ DE_ADIA
 #define _OE_ DE_ODIA
 #define _UE_ DE_UDIA
@@ -18,21 +23,24 @@ enum custom_keycodes { K_NAV = SAFE_RANGE, K_SYM };
 
 // flow from daliusd
 // https://github.com/qmk/qmk_firmware/pull/16174
-#include "flow.h"
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  return update_flow(keycode, record->event.pressed, record->event.key);
+  const uint8_t mods = get_mods();
+  const uint8_t oneshot_mods = get_oneshot_mods();
+  switch (keycode) {
+  case KC_SS:
+    if (record->event.pressed) {
+      if ((mods | oneshot_mods) & MOD_MASK_SHIFT) {
+        del_oneshot_mods(MOD_MASK_SHIFT);
+        unregister_mods(MOD_MASK_SHIFT);
+        SEND_STRING(SS_RALT("S"));
+        register_mods(mods);
+      } else
+        tap_code(DE_SS);
+    }
+    return false;
+  }
+  return true;
 }
-void matrix_scan_user(void) { flow_matrix_scan(); }
-const uint16_t flow_config[FLOW_COUNT][2] = {
-    {MO(2), KC_LALT},
-    {MO(2), KC_LGUI},
-    {MO(2), KC_LCTL},
-    {MO(2), KC_LSFT},
-};
-const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
-    {K_SYM, lSYMB},
-    {K_NAV, lN_N},
-};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -42,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┤                           ├─────────┼─────────┼─────────┼─────────┼────────┤
    KC_C,     KC_T,     KC_I,     KC_E,     KC_O,                                 KC_B,     KC_N,     KC_R,     KC_S,     KC_G, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   KC_F,     KC_V,     _UE_,     _AE_,     _OE_,     DF(lSTENO),       XXXXXXX,  DE_Y,     DE_Z,     KC_COMM,  KC_DOT,   KC_K, 
+   KC_F,     KC_V,     _UE_,     _AE_,     _OE_,    LGUI(KC_X),        KC_SCRL,  DE_Y,     DE_Z,     KC_COMM,  KC_DOT,   KC_K, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   KC_LGUI,  XXXXXXX,  DE_SS,    QK_REP,   _SFT_,    K_SYM,            K_NAV,    KC_SPC,   QK_AREP,  KC_Q,     XXXXXXX,  XXXXXXX), 
+   XXXXXXX,  XXXXXXX,  KC_SS,   OSL(lSYMB),_SFT_,    QK_REP,           QK_REP,   KC_SPC,   QK_AREP,  KC_Q,     K_STN_1,  K_STN_2), 
 //└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
  [lSYMB] = LAYOUT(
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
@@ -54,37 +62,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
    DE_HASH,  DE_DLR,   DE_PIPE,  DE_TILD,  DE_GRV,   XXXXXXX,          XXXXXXX,  DE_PLUS,  DE_PERC,  DE_DQUO,  DE_QUOT,  DE_SCLN, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   XXXXXXX,  XXXXXXX,  RSA(KC_S),XXXXXXX,  XXXXXXX,  TG(lSYMB),        OSL(lMED),DE_EURO,  DE_SECT,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
-//└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
- [lN_N] = LAYOUT(
-//┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
-   KC_HOME,  KC_PGUP,  KC_UP,    KC_PGDN,  KC_END,                               KC_X,     KC_7,     KC_8,     KC_9,     XXXXXXX, 
-//├─────────┼─────────┼─────────┼─────────┼─────────┤                           ├─────────┼─────────┼─────────┼─────────┼────────┤
-   KC_BSPC,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_DEL,                               DE_LBRC,  KC_4,     KC_5,     KC_6,     KC_0, 
-//├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   _ALT_,    _GUI_,    _SFT_,    _CTL_,    XXXXXXX,  XXXXXXX,          KC_PSCR,  DE_RBRC,  KC_1,     KC_2,     KC_3,     KC_DOT, 
-//├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  OSL(lMED),        TG(lN_N), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
+   XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,          _CTL_,    _ALT_,    DE_SECT,  DE_EURO,  XXXXXXX,  XXXXXXX), 
 //└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
   [lMED] = LAYOUT(
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
-   KC_PWR,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                              XXXXXXX,  KC_F7,    KC_F8,    KC_F9,    KC_F12, 
+   XXXXXXX,  XXXXXXX,  KC_VOLU,  KC_BRIU,  XXXXXXX,                              XXXXXXX,  KC_F7,    KC_F8,    KC_F9,    KC_F12, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┤                           ├─────────┼─────────┼─────────┼─────────┼────────┤
-   KC_VOLU,  XXXXXXX, DF(lHOLL), XXXXXXX,  KC_BRIU,                              XXXXXXX,  KC_F4,    KC_F5,    KC_F6,    KC_F10, 
+   XXXXXXX,  XXXXXXX,  KC_VOLD,  KC_BRID,  DF(lHOLL),                            XXXXXXX,  KC_F4,    KC_F5,    KC_F6,    KC_F10, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   KC_VOLD,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BRID, XXXXXXX,           XXXXXXX,  XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F11, 
+   XXXXXXX,  XXXXXXX,  KC_MUTE,  XXXXXXX,  XXXXXXX,  KC_PWR,           XXXXXXX,  XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F11, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   KC_MUTE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  TG(lMED),         TG(lMED), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
+   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_PSCR,  XXXXXXX,          XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
 //└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
  [lSTENO] = LAYOUT(
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
-   XXXXXXX,  XXXXXXX,  STN_N1,   STN_N2,   XXXXXXX,                              STN_N3,   STN_N4,   XXXXXXX,  XXXXXXX,  XXXXXXX, 
+   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  STN_ST3,                              STN_ST4,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┤                           ├─────────┼─────────┼─────────┼─────────┼────────┤
-   STN_S1,   STN_TL,   STN_PL,   STN_HL,   STN_ST2,                              STN_FR,   STN_PR,   STN_LR,   STN_TR,   STN_DR, 
+   XXXXXXX,  STN_S1,   STN_TL,   STN_PL,   STN_HL,                               STN_FR,   STN_PR,   STN_LR,   STN_TR,   STN_DR, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   STN_S2,   STN_KL,   STN_WL,   STN_RL,   STN_ST3, DF(lBONE),         XXXXXXX,  STN_RR,   STN_BR,   STN_GR,   STN_SR,   STN_ZR, 
+   XXXXXXX,  STN_S2,   STN_KL,   STN_WL,   STN_RL,   STN_ST1,          STN_ST2,  STN_RR,   STN_BR,   STN_GR,   STN_SR,   STN_ZR, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   XXXXXXX,  XXXXXXX,  XXXXXXX,  STN_A,    STN_O,    XXXXXXX,          STN_E,    STN_U,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
+   XXXXXXX,  XXXXXXX,  XXXXXXX,  STN_N1,   STN_A,    STN_O,            STN_E,    STN_U,    STN_N2,   XXXXXXX,  K_STN_1,  K_STN_2), 
 //└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
  [lHOLL] = LAYOUT(
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐

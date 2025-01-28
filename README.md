@@ -35,7 +35,5 @@ The key placement suggests a finger to key assignment like so:
           † : assign seldom tasks
           H : a key you could press with the palm
 
-The layout makes use of one-shot modifiers and layer switches, which is made possible by
-[this](https://github.com/qmk/qmk_firmware/pull/16174) code (files `flow.c` and `flow.h`).
-
-Low profile keycaps and low weight springs/switches open up the possibility for same finger combos.
+Low profile keycaps and low weight springs/switches open up the possibility for same finger combos, which the layout makes
+heavy use of.
