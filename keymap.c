@@ -21,8 +21,6 @@ enum custom_keycodes {
  */
 #include "g/keymap_combo.h"
 
-// flow from daliusd
-// https://github.com/qmk/qmk_firmware/pull/16174
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   const uint8_t mods = get_mods();
   const uint8_t oneshot_mods = get_oneshot_mods();
