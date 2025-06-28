@@ -1,7 +1,7 @@
 #define ONESHOT_TAP_TOGGLE 2
 #define ONESHOT_TIMEOUT 400
 #define COMBO_VARIABLE_LEN
-#define COMBO_TERM 90
+#define COMBO_TERM 130
 // reduce size of resulting image
 #define LAYER_STATE_8BIT
 #undef LOCKING_SUPPORT_ENABLE
