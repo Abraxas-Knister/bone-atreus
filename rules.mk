@@ -4,6 +4,7 @@ REPEAT_KEY_ENABLE=yes
 STENO_ENABLE=yes
 STENO_PROTOCOL=geminipr
 EXTRAKEY_ENABLE=yes
+LAYER_LOCK_ENABLE=yes
 # reduce size of resulting image
 MAGIC_ENABLE=no
 LTO_ENABLE=yes

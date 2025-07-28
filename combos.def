@@ -2,21 +2,30 @@
 /*
   ┌───────┬───────┬───────┬───────┬───────┐                        ┌───────┬───────┬───────┬───────┬───────┐
   │       │       │       │       │       │                        │       │       │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
+  ├───────┼──pu──HOM──up─END──pd──┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
   │       │       │       │   •   │       │                        │       │   •︎   │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
+  ├───────┼──le───┼───dw──┼───ri──┼numpad─┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
   │       │      tab   escape     │       │       │        │       │      del backspace  enter     │       │
-  ├───────┼───── windows_one ─────┼───────┼───────┤        ├───────┼───────┼───── windows_two ─────┼───────┤
+  ├───────┼──────── win_one   ────┼───────┼───────┤        ├───────┼───────┼─────   win_two   ─────┼───────┤
   │       │       │       │       │   •   │       │        │       │   •   │       │       │     steno     │
   └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
 */
-COMB(tab,         KC_TAB,    KC_V,    DE_UDIA)
-COMB(escape,      KC_ESC,    DE_UDIA, DE_ADIA)
+COMB(pu,          KC_PGUP,   KC_D,    KC_T)
+COMB(HOM,         KC_HOME,   KC_D,    KC_T,  KC_U, KC_I)
+COMB(up,          KC_UP,     KC_U,    KC_I)
+COMB(END,         KC_END,    KC_U,    KC_I,  KC_A, KC_E)
+COMB(pd,          KC_PGDN,   KC_A,    KC_E)
+COMB(le,          KC_LEFT,   KC_T,    KC_V)
+COMB(dw,          KC_DOWN,   KC_I,    _UE_)
+COMB(ri,          KC_RIGHT,  KC_E,    _AE_)
+COMB(numpad,      OSL(lNUM), KC_O,    _OE_)
+COMB(tab,         KC_TAB,    KC_V,    _UE_)
+COMB(escape,      KC_ESC,    DE_UDIA, _AE_)
 COMB(del,         KC_DEL,    DE_Y,    DE_Z)
 COMB(backspace,   KC_BSPC,   DE_Z,    KC_COMM)
 COMB(enter,       KC_ENT,    KC_COMM, KC_DOT)
-COMB(windows_one, KC_LGUI,   KC_V,    DE_UDIA, DE_ADIA)
-COMB(windows_two, KC_LGUI,   DE_Z,    KC_COMM, KC_DOT)
+COMB(win_one,     KC_LGUI,   KC_V,    DE_UDIA, DE_ADIA)
+COMB(win_two,     KC_LGUI,   DE_Z,    KC_COMM, KC_DOT)
 TOGG(steno,       lSTENO,    K_STN_1, K_STN_2)
 
 // symbol layer
@@ -32,20 +41,6 @@ TOGG(steno,       lSTENO,    K_STN_1, K_STN_2)
   └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
 */
 COMB(backspace2,  KC_BSPC,  DE_PERC,  DE_DQUO)
-
-// number layer
-/*
-  ┌───────┬───────┬───────┬───────┬───────┐                        ┌───────┬───────┬───────┬───────┬───────┐
-  │       │       │       │       │       │                        │       │       │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┤                        ├───────┼───────┼───────┼───────┼───────┤
-  │       │       │       │   •   │       │                        │       │   •   │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┼───────┐        ┌───────┼───────┼───────┼───────┼───────┼───────┤
-  │       │       │       │       │       │       │        │       │       │       │       │       │       │
-  ├───────┼───────┼───────┼───────┼───────┼───────┤        ├───────┼───────┼──── windows_three ────┼───────┤
-  │       │       │       │       │   •   │       │        │       │   •   │       │       │       │       │
-  └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
-*/
-COMB(windows_three, KC_LGUI,  KC_1,  KC_2, KC_3)
 
 // steno layer
 /*

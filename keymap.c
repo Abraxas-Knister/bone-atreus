@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include QMK_KEYBOARD_H
 
-enum layers { lBONE, lSYMB, lN_N, lSTENO };
+enum layers { lBONE, lSYMB, lNUM, lSTENO };
 enum custom_keycodes {
   K_STN_1 = SAFE_RANGE, // combo: back to base from steno
   K_STN_2,              //
@@ -115,7 +115,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 }
 layer_state_t layer_state_set_user(layer_state_t state) {
-  if (IS_LAYER_OFF_STATE(state, lN_N)) {
+  if (IS_LAYER_OFF_STATE(state, lNUM)) {
     kpadon = false;
     fndown = false;
   }
@@ -132,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
    KC_F,     KC_V,     _UE_,     _AE_,     _OE_,    LGUI(KC_X),        KC_SCRL,  DE_Y,     DE_Z,     KC_COMM,  KC_DOT,   KC_K, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   QK_REP,   QK_AREP,  KC_SS,   OSL(lSYMB),_SFT_,    _ALT_,            _CTL_,    KC_SPC,   OSL(lN_N),KC_Q,     K_STN_1,  K_STN_2), 
+   QK_REP,   QK_AREP,  KC_SS,   OSL(lSYMB),_SFT_,    _ALT_,            _CTL_,    KC_SPC,   QK_REP,   KC_Q,     K_STN_1,  K_STN_2), 
 //└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
  [lSYMB] = LAYOUT(
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
@@ -144,15 +144,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
    XXXXXXX,  DE_EURO,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,           _CTL_,   _ALT_,    DE_SECT,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
 //└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
- [lN_N] = LAYOUT(
+ [lNUM] = LAYOUT(
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
-   XXXXXXX,  KC_PGUP,  KC_UP,    KC_PGDN,  KC_PSCR,                              XXXXXXX,  KC_7,     KC_8,     KC_9,     KC_00, 
+   XXXXXXX,  KC_PGUP,  KC_UP,    KC_PGDN,  XXXXXXX,                              XXXXXXX,  KC_7,     KC_8,     KC_9,     KC_00, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┤                           ├─────────┼─────────┼─────────┼─────────┼────────┤
    KC_HOME,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_END,                               XXXXXXX,  KC_4,     KC_5,     KC_6,     KC_0, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┐        ┌─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   KC_FN,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_KP,            XXXXXXX,  XXXXXXX,  KC_1,     KC_2,     KC_3,     KC_DOT, 
+   XXXXXXX,  KC_FN,    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_KP,            QK_LLCK,  XXXXXXX,  KC_1,     KC_2,     KC_3,     KC_DOT, 
 //├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤        ├─────────┼─────────┼─────────┼─────────┼─────────┼────────┤
-   XXXXXXX,  XXXXXXX,  _GUI_,    _CTL_,    _SFT_,    _ALT_,            XXXXXXX,  XXXXXXX,  _______ ,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
+   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _GUI_,    _ALT_,            _CTL_,     _SFT_,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX), 
 //└─────────┴─────────┴─────────┴─────────┴─────────┴────────┘        └─────────┴─────────┴─────────┴─────────┴─────────┴────────┘
  [lSTENO] = LAYOUT(
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐                           ┌─────────┬─────────┬─────────┬─────────┬────────┐
