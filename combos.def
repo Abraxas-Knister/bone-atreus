@@ -17,7 +17,7 @@ COMB(END,         KC_END,    KC_U,    KC_I,  KC_A, KC_E)
 COMB(ri,          KC_RGHT,   KC_A,    KC_E)
 COMB(pu,          KC_PGUP,   KC_X,    KC_O)
 COMB(dw,          KC_DOWN,   KC_I,    _UE_)
-COMB(npad_b,      OSL(lNUM), KC_E,    _AE_)
+COMB(npad_b,      MO(lNUM), KC_E,    _AE_)
 COMB(pd,          KC_PGDN,   KC_O,    _OE_)
 COMB(tab,         KC_TAB,    KC_V,    _UE_)
 COMB(escape,      KC_ESC,    DE_UDIA, _AE_)
@@ -40,7 +40,7 @@ TOGG(steno,       lSTENO,    K_STN_1, K_STN_2)
   │       │       │       │       │   •   │       │        │       │   •   │       │       │       │       │
   └───────┴───────┴───────┴───────┴───────┴───────┘        └───────┴───────┴───────┴───────┴───────┴───────┘
 */
-COMB(npad_s,     OSL(lNUM), DE_RCBR, DE_TILD)
+COMB(npad_s,     MO(lNUM), DE_RCBR, DE_TILD)
 COMB(backspace2, KC_BSPC,   DE_PERC, DE_DQUO)
 
 // steno layer
